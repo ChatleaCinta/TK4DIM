@@ -63,6 +63,22 @@ class BarangModel
         return $this->Satuan;
     }
 
+    public function Barangdasbor()
+    {
+        try {
+            $query = "SELECT * FROM barang 
+            INNER JOIN pengguna ON barang.iduser = pengguna.iduser
+            INNER JOIN pembelian ON barang.IdBarang = pembelian.IdBarang
+            INNER JOIN penjualan ON barang.IdBarang = penjualan.IdBarang";
+
+            $prepareDB = $this->db->prepare($query);
+            $prepareDB->execute();
+            $result = $prepareDB->fetchAll();
+            return $result;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
     public function getAllBarang($NamaBarang)
     {
         try {

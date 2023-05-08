@@ -36,18 +36,16 @@
                     <th>Nama Barang</th>
                     <th>Harga Jual</th>
                     <th>Harga Beli</th>
-                    <th>Stok</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($data_barang as $data) { ?>
+                <?php foreach ($data_barang as $barang) { ?>
                 <tr>
-                    <td><?php if (isset($data->IdBarang)) echo $data->NamaBarang; ?></td>
-                    <?php } ?>
-                    <td><?php if (isset($data->IdPenjualan)) echo $data->HargaJual; ?></td>
-                    <td><?php if (isset($data->IdPembelian)) echo $data->HargaBeli; ?></td>
-                    <td><?php if (isset($data->stok)) echo $data->stok; ?></td>
+                        <td><?php echo $barang->NamaBarang; ?></td>
+                        <td>Rp. <?php echo number_format($barang->HargaBeli, 0, ',', '.'); ?></td>
+                        <td>Rp. <?php echo number_format($barang->HargaJual, 0, ',', '.'); ?></td>
                 </tr>
+                <?php } ?>
             </tbody>
         </table>
 </main>

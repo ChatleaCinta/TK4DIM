@@ -5,9 +5,8 @@ class DasborController extends Controller
 {
     public function index()
     {
-        $NamaBarang = isset($_GET['NamaBarang']) ? $_GET['NamaBarang'] : null;
         $barang_model = $this->loadModel('BarangModel');
-        $data_barang = $barang_model->getAllBarang($NamaBarang);
+        $data_barang = $barang_model->Barangdasbor();
         
         $totalHargaBeli = 0;
         $totalbeli = 0;
@@ -15,7 +14,6 @@ class DasborController extends Controller
         $pembelian = $pembelian_model->getAllPembelian();
         foreach ($pembelian as $pembelian_item) {
             $totalHargaBeli += $pembelian_item->HargaBeli * $pembelian_item->JumlahPembelian;
-            $totalbeli = $pembelian_item->JumlahPembelian;
         }
         
         $totalHargaJual = 0;
@@ -24,17 +22,13 @@ class DasborController extends Controller
         $penjualan = $penjualan_model->getAllPenjualan();
         foreach ($penjualan as $penjualan_item) {
             $totalHargaJual += $penjualan_item->HargaJual * $penjualan_item->JumlahPenjualan;
-            $totaljual = $penjualan_item->JumlahPenjualan;
         }
 
         $labaRugi = $totalHargaJual - $totalHargaBeli;
-        $stock = $totalbeli - $totaljual;
-
-    
+       
         $data['total_harga_beli'] = $totalHargaBeli;
         $data['total_harga_jual'] = $totalHargaJual;
         $data['laba_rugi'] = $labaRugi;
-        $data['stok'] = $stock;
 
 
         $menu = 'dasbor';
